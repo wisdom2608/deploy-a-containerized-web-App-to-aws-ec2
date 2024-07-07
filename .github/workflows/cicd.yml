@@ -54,21 +54,20 @@ jobs:
 
     - name: Build aand Push Docker image to Docker Hub
       run: |
-        IMAGE_TAG=latest
-        sudo docker build -t wisdomtech/wisdomweb:$IMAGE_TAG .
-        sudo docker push wisdomtech/wisdomweb:$IMAGE_TAG 
+        docker build -t webapp/wisdomweb .
+        docker push webapp/wisdomweb:latest
 
   deploy:
     needs: build
     runs-on: aws-ec2 #aws-ec2 is a selfhosted runners
     steps:
     - name: Pull the image from Docker Hub 
-      run: docker pull wisdomtech/wwisdomweb:latest 
+      run: docker pull webapp/wisdomweb:latest 
     - name: Delete Old Container if it exists
       run: docker rm -f wisdomcontainer
 
     - name: Run The Docker container
-      run: docker run -d --name wisdomtechapp -p 8900:80 wisdomtech/wisdomweb
+      run: docker run -d --name wisdomtechapp -p 8900:80 webapp/wisdomweb
         
 
 
