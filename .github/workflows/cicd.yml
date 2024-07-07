@@ -55,7 +55,7 @@ jobs:
     - name: Build aand Push Docker image to Docker Hub
       run: |
         docker build -t wisdomtech/wisdomweb . 
-        docker push wisdomtech/wisdomweb:latest
+        docker push wisdomtech/wisdomweb
 
   deploy:
     needs: build
