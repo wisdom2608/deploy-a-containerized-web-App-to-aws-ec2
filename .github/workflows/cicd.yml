@@ -53,12 +53,12 @@ jobs:
 
 #       sudo apt update                         # To update the instance for security patches
 #       sudo apt install docker.io -y           # To install docker package
-#       systemctl start docker                  # To start docker
+#       sudo systemctl start docker                  # To start docker
+#       sudo chmod 666 /var/run/docker.sock     # To obtain permissions to connect to Docker Daemon socket
 #       docker ps                               # To check if any docker container exist
 #       sudo docker hello-world                 # To check if docker is working
-#       sudo chmod 666 /var/run/docker.sock     # To obtain permissions to connect to Docker Daemon socket
 #       sudo systemctl enable docker            # To enable docker
-#       D0cker --version                        # To see the Docker version installed.
+#       docker --version                        # To see the Docker version installed.
 
 # 8- Create self-hosted runners on your AWS ec2 instance in github. To do this:
 #      - click on "Sittings", click on "Actions", cick on "Runners", click "New self-hoste runner"
