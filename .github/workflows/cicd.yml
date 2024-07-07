@@ -55,8 +55,8 @@ jobs:
     - name: Build aand Push Docker image to Docker Hub
       run: |
         IMAGE_TAG=latest
-        docker build -t wisdomtech/wisdomweb:$IMAGE_TAG .
-        docker push wisdomtech/wisdomweb:$IMAGE_TAG 
+        sudo docker build -t wisdomtech/wisdomweb:$IMAGE_TAG .
+        sudo docker push wisdomtech/wisdomweb:$IMAGE_TAG 
 
   deploy:
     needs: build
