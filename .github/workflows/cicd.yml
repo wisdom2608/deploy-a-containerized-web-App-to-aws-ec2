@@ -3,7 +3,9 @@ name: Doploy A Containerized Web Application on AWS EC2 Instance Using Github Ac
 on:
   push:
     branches: [ "main" ]
-
+  pull: 
+    branches: [ "main" ]
+    
 jobs:
 
   build:
