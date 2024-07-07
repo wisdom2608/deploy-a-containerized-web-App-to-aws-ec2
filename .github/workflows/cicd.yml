@@ -52,14 +52,14 @@ jobs:
 # 7- Install docker. You can run the following commands to install docker properly:
 #     *For me, the AMI i chose for my EC2 instance is "ubuntu". so the commands to execute are:
 
-#       sudo apt update                         # To update the instance for security patches
-#       sudo apt install docker.io -y           # To install docker package
-#       sudo systemctl start docker                  # To start docker
-#       sudo chmod 666 /var/run/docker.sock     # To obtain permissions to connect to Docker Daemon socket
-#       docker ps                               # To check if any docker container exist
-#       sudo docker hello-world                 # To check if docker is working
-#       sudo systemctl enable docker            # To enable docker
-#       docker --version                        # To see the Docker version installed.
+#       sudo apt-get update                         # To update the instance for security patches
+#       sudo apt-get install docker.io -y           # To install docker package
+#       sudo systemctl start docker                 # To start docker
+#       sudo docker run hello-world                 # To check if docker is working
+#       docker ps                                   # To check if any docker container exist
+#       sudo chmod 666 /var/run/docker.sock         # To obtain permissions to connect to Docker Daemon socket
+#       sudo systemctl enable docker                # To enable docker
+#       docker --version                            # To see the Docker version installed.
 
 # 8- Create self-hosted runners on your AWS ec2 instance in github. To do this:
 #      - click on "Sittings", click on "Actions", cick on "Runners", click "New self-hoste runner"
