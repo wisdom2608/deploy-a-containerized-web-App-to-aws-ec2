@@ -13,9 +13,9 @@
 #       - name: Login to Docker Hub
 #         uses: login -u ${{ secrets.DOCKER_USERNAME }} -P ${{ secrets.DOCKER_PASSWORD }}
 #       - name: Build Docker Image
-#         run: docker build -t wisdomtech/wwisdomweb . 
+#         run: docker build -t wisdomtech/wisdomweb . 
 #       - name: Push image to docker Hub
-#       - run: docker push wisdomtech/wwisdomweb:latest
+#       - run: docker push wisdomtech/wisdomweb:latest
 
 #   deploy:
 #     needs: build
@@ -54,8 +54,8 @@ jobs:
 
     - name: Build aand Push Docker image to Docker Hub
       run: |
-        docker build -t wisdomtech/wwisdomweb . 
-        docker push wisdomtech/wwisdomweb:latest
+        docker build -t wisdomtech/wisdomweb . 
+        docker push wisdomtech/wisdomweb:latest
 
   deploy:
     needs: build
