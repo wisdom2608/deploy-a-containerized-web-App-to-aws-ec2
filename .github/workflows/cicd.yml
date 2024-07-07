@@ -1,39 +1,7 @@
-# name: Doploy A Web Application on EC2 Instance Using Github Actions
-
-# on:
-#   push:
-#     branches: [ "main" ]
-
-# job:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#      - name: Checkout Source
-#         uses: actions/checkout@v3
-#       - name: Login to Docker Hub
-#         uses: login -u ${{ secrets.DOCKER_USERNAME }} -P ${{ secrets.DOCKER_PASSWORD }}
-#       - name: Build Docker Image
-#         run: docker build -t wisdomtech/wisdomweb . 
-#       - name: Push image to docker Hub
-#       - run: docker push wisdomtech/wisdomweb:latest
-
-#   deploy:
-#     needs: build
-#     runs-on: aws-ec2 #aws-ec2 is a selfhosted runners
-#     steps:
-#       - name: Pull the image from Docker Hub 
-#         run: docker pull wisdomtech/wwisdomweb:latest 
-#       - name: Delete Old Container if it exists
-#       - run: docker rm -f wisdomcontainer
-#       - name: Run The Docker container
-#         run: docker run -d --name wisdomtechapp -p 8900:80 wisdomtech/wisdomweb
-
-name: Doploy A Web Application on EC2 Instance Using Github Actions
+name: Doploy A Containerized Web Application on AWS EC2 Instance Using Github Actions
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -54,23 +22,77 @@ jobs:
 
     - name: Build and Push Docker image to Docker Hub
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/wisdomweb .
-        docker push ${{ secrets.DOCKER_USERNAME }}/wisdomweb:latest
+        $IMAGE_TAG=latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}:$IMAGE_TAG .
+        docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPONAME }}:$IMAGE_TAG 
 
   deploy:
     needs: build
-    runs-on: aws-ec2 #aws-ec2 is a selfhosted runners
+    runs-on: aws-ec2 #aws-ec2 is a self-hosted runners
     steps:
     - name: Pull the image from Docker Hub 
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/wisdomweb:latest 
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_USERNAME }}:latest 
     - name: Delete Old Container if it exists
-      run: docker rm -f wisdomcontainer
+      run: docker rm -f wisdom2608/wisdomweb
 
     - name: Run The Docker container
-      run: docker run -d --name wisdomtechapp -p 8900:80 ${{ secrets.DOCKER_USERNAME }}/wisdomweb
+      run: docker run -d --name webapp -p 8800:80 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_USERNAME }}
         
 
+# PRODUCES TO SUCCESS IN TGHIS PROJECT
+# 1- Test your source code locally untill it works.
+# 2- Create a prepository in github account.
+# 3- Create a repository in Docker Hub account.
+# 4- Create secrets in your within the github repository you are working with. To do this:
+#   - Click on "Settings", click on "Secrets and Variable", click on "Actions", and click on 
+#     "new repository secret" and create the secrets found on the workflows file.
+# 5- Login to AWS account and launch an EC2 instance. The AMI depends on the dependencies you specified on your Dockerfile.
+# 6- Enable port 443, port 80 on the instance security group.
+# 7- Install docker. You can run the following commands to install docker properly:
+#     *For me, the AMI i chose for my EC2 instance is "ubuntu". so the commands to execute are:
+
+#       sudo apt update                         # To update the instance for security patches
+#       sudo apt install docker.io -y           # To install docker package
+#       systemctl start docker                  # To start docker
+#       docker ps                               # To check if any docker container exist
+#       sudo docker hello-world                 # To check if docker is working
+#       sudo chmod 666 /var/run/docker.sock     # To obtain permissions to connect to Docker Daemon socket
+#       sudo systemctl enable docker            # To enable docker
+#       D0cker --version                        # To see the Docker version installed.
+
+# 8- Create self-hosted runners on your AWS ec2 instance in github. To do this:
+#      - click on "Sittings", click on "Actions", cick on "Runners", click "New self-hoste runner"
+#      - Click on "Linux" and the a set of commands will appear. You have to copy the commands one after the other...
+#       ...and run them on your ec2 instance to dowmload binary files provivided by github action.
+
+#      * For Download,
+#      - a) The first command Creates a folder under the drive root in your EC2 instance.
+#      - b) The second command downloads the latest runner packages or binary files provided by github action.
+#      - c) The third command which is optional, validates the hash.
+#      - d) The fourth command extracts the installer or the filesystem.
+
+#      * For Configuration,
+#      - e) The fifth creates the runner and start the configuration experience. The GITHUB ACTIONS logo will apper after running this command.
+#           After this command will prompt you to: 
+#            i)- Enter the name of runner group. To do this, hit "enter" to set as Default.
+#            ii)- Enter the name of runner. Type "aws-ec2" as the name. Check line 31 on the yaml workflow file.
+#                 The name you provide as the runner name is the name you put on the yaml workflow file under deploy job.
+#                 We used "runs-on: aws-ec2" in our workflow file for deploy job\
+
+#            iii)- Enter additional labels. Type "aws-ec2" as the labels.
+#                  The ouput after this commands id "runners successfully added".
+#       - f) The sixth command "./run.sh"  gets your EC2 connected to github.
+#
+#  9- Click on "settings", click on "Actions", and the Click on "Runners", you see "aws-ec2" as your runner and the status will be "idle" with a green dot.
+#      
+#  NB: If you use "runs-on: self-hosted" in your workflow file for the deploy job, then the names provided in...
+#       ...ii) and iii) will be "self-hosted". No doubt!      
+
+#                                                Now YOU ARE GOOD TO GO 
+
+# 10- Commit and changes to your repository, copy the IPV4 address of your EC2 instance, open a new browser past on it including the external port of your container.
+#   e.g 3.329.208.109:8000
 
 
-  
 
+#                                       CONGRATULATIONS! YOU MADE IT!!!!!
