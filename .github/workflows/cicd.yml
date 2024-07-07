@@ -32,12 +32,12 @@ jobs:
     runs-on: aws-ec2 #aws-ec2 is a self-hosted runners
     steps:
     - name: Pull the image from Docker Hub 
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_USERNAME }} 
+      run: docker pull wisdom2608/wisdomweb:latest
     - name: Delete Old Container if it exists
       run: docker rm -f wisdom2608/wisdomweb
 
     - name: Run The Docker container
-      run: docker run -d --name webapp -p 8800:80 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_USERNAME }}
+      run: docker run -d --name webapp -p 8800:80 wisdom2608/wisdomweb
         
 
 # PRODUCES TO SUCCESS IN TGHIS PROJECT
