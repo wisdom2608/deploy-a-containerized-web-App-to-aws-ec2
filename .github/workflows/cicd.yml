@@ -56,7 +56,7 @@ jobs:
       run: |
         IMAGE_TAG=latest
         docker build -t wisdomtech/wisdomweb:$IMAGE_TAG .
-        docker push wisdomtech/wisdomweb
+        docker push wisdomtech/wisdomweb:$IMAGE_TAG 
 
   deploy:
     needs: build
