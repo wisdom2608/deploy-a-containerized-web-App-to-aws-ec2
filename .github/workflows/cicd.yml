@@ -40,7 +40,10 @@ jobs:
       run: docker run -d --name webapp -p 8800:80 wisdom2608/wisdomweb
         
 
-# PRODUCES TO SUCCESS IN TGHIS PROJECT
+#  NB:   This is a case where the CI (Build job) workflow yml file and (Deploy job) workflow yml file are on the same workflow file.
+
+#                 PROCEDURES TO SUCCEED IN THIS PROJECT
+
 # 1- Test your source code locally untill it works.
 # 2- Create a prepository in github account.
 # 3- Create a repository in Docker Hub account.
@@ -78,7 +81,7 @@ jobs:
 #            i)- Enter the name of runner group. To do this, hit "enter" to set as Default.
 #            ii)- Enter the name of runner. Type "aws-ec2" as the name. Check line 31 on the yaml workflow file.
 #                 The name you provide as the runner name is the name you put on the yaml workflow file under deploy job.
-#                 We used "runs-on: aws-ec2" in our workflow file for deploy job\
+#                 We used "runs-on: aws-ec2" in our workflow file for deploy job
 
 #            iii)- Enter additional labels. Type "aws-ec2" as the labels.
 #                  The ouput after this commands id "runners successfully added".
@@ -89,7 +92,7 @@ jobs:
 #  NB: If you use "runs-on: self-hosted" in your workflow file for the deploy job, then the names provided in...
 #       ...ii) and iii) will be "self-hosted". No doubt!      
 
-#                                                Now YOU ARE GOOD TO GO 
+#                                                NOW YOU ARE GOOD TO GO !
 
 # 10- Commit and changes to your repository, copy the IPV4 address of your EC2 instance, open a new browser past on it including the external port of your container.
 #   e.g 3.329.208.109:8000
