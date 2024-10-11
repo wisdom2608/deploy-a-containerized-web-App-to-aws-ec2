@@ -59,19 +59,19 @@ jobs:
 #       sudo apt-get install docker.io -y           # To install docker package
 #       sudo systemctl start docker                 # To start docker
 #       sudo docker run hello-world                 # To check if docker is working
-#       docker ps                                   # To check if any docker container exist
+#       docker ps                                   # To check if any docker container exists
 #       sudo chmod 666 /var/run/docker.sock         # To obtain permissions to connect to Docker Daemon socket
 #       sudo systemctl enable docker                # To enable docker
 #       docker --version                            # To see the Docker version installed.
 
 # 8- Create self-hosted runners on your AWS ec2 instance in github. To do this:
 #      - click on "Sittings", click on "Actions", cick on "Runners", click "New self-hoste runner"
-#      - Click on "Linux" and the a set of commands will appear. You have to copy the commands one after the other...
-#       ...and run them on your ec2 instance to dowmload binary files provivided by github action.
+#      - Click on "Linux" and a set of commands will appear. You have to copy the commands one after the other...
+#       ...and run them on your ec2 instance to dowmload binary files provivided by github actions.
 
 #      * For Download,
 #      - a) The first command Creates a folder under the drive root in your EC2 instance.
-#      - b) The second command downloads the latest runner packages or binary files provided by github action.
+#      - b) The second command downloads the latest runner packages or binary files provided by github actions.
 #      - c) The third command which is optional, validates the hash.
 #      - d) The fourth command extracts the installer or the filesystem.
 
